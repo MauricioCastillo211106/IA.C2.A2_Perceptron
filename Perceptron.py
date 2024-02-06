@@ -132,8 +132,15 @@ def graficas_entrenamiento(norma_error, historial_pesos):
     # Ajustar diseño y mostrar la figura
     plt.tight_layout()
     plt.show()
+# Función para obtener la tasa de aprendizaje y el número de épocas desde la interfaz
+def obtener_parametros():
+    global tasa_de_aprendizaje, epocas
+    tasa_de_aprendizaje = float(entry_tasa_aprendizaje.get())
+    epocas = int(entry_epocas.get())
+
 
 def seleccionar_archivo():
+    obtener_parametros() 
     ruta_archivo = filedialog.askopenfilename(
         title="Seleccionar archivo CSV",
         filetypes=[("Archivos CSV", "*.csv"), ("Todos los archivos", "*.*")]
@@ -148,6 +155,17 @@ def seleccionar_archivo():
 # Crear la ventana principal
 ventana = tk.Tk()
 ventana.title("Lector de CSV")
+
+# Crear cuadros de entrada para la tasa de aprendizaje y el número de épocas
+label_tasa_aprendizaje = tk.Label(ventana, text="Tasa de Aprendizaje:")
+label_tasa_aprendizaje.pack()
+entry_tasa_aprendizaje = tk.Entry(ventana)
+entry_tasa_aprendizaje.pack()
+
+label_epocas = tk.Label(ventana, text="Número de Épocas:")
+label_epocas.pack()
+entry_epocas = tk.Entry(ventana)
+entry_epocas.pack()
 
 # Crear un botón para seleccionar el archivo
 boton_seleccionar = tk.Button(ventana, text="Seleccionar Archivo CSV", command=seleccionar_archivo)
